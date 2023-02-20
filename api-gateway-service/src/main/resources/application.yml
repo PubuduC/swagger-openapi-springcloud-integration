@@ -1,0 +1,34 @@
+server:
+  servlet:
+    context-path: /
+  port:
+    8080
+spring:
+  application:
+    name: api-gateway-service
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+        primaryName: API Gateway Service
+      - url: /product-service/v3/api-docs
+        name: Product Service
+        primaryName: Product Service
+      - url: /price-service/v3/api-docs
+        name: Price Service
+        primaryName: Price Service
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost

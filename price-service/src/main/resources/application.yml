@@ -1,0 +1,26 @@
+server:
+  servlet:
+    context-path: /
+  port:
+    9191
+spring:
+  application:
+    name: price-service
+openapi:
+  service:
+    title: price-service doc
+    version: 1.0.0
+    url: http://localhost:8080
+springdoc:
+  api-docs:
+    path: /price-service/v3/api-docs
+  swagger-ui:
+    path: /price-service/swagger-ui.html
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
