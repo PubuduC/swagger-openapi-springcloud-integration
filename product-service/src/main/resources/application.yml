@@ -6,10 +6,9 @@ server:
 spring:
   application:
     name: product-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/demo-product
-    username: postgres
-    password: root
+  profiles:
+    active:
+      - ${ACTIVE_SPRING_PROFILE:dev}
   jpa:
     show-sql: true
     hibernate:
@@ -36,3 +35,47 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     hostname: localhost
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo-product
+    username: postgres
+    password: root
+
+openapi:
+  service:
+    url: http://localhost:8080
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo-product
+    username: postgres
+    password: root
+
+openapi:
+  service:
+    url: http://localhost:8080
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo-product
+    username: postgres
+    password: root
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false
