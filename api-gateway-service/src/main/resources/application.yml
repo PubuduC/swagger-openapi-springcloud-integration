@@ -4,6 +4,9 @@ server:
   port:
     8080
 spring:
+  profiles:
+    active:
+      - ${ACTIVE_SPRING_PROFILE:dev}
   application:
     name: api-gateway-service
 springdoc:
@@ -28,7 +31,42 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
   instance:
     hostname: localhost
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false
